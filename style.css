@@ -103,6 +103,8 @@ body {
   margin: 0 20px;
   text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff5fa2;
   transition: transform 0.2s ease, text-shadow 0.3s ease, color 0.2s ease;
+  padding: 10px 20px; /* easier to touch on small screens */
+  min-width: 80px;
 }
 
 #yes-btn:hover {
@@ -123,14 +125,13 @@ body {
 
 #valentine-btns {
   position: absolute;
-  top: calc(50% + 100px); 
+  top: 60%; /* instead of hard pixels */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  flex-wrap: wrap; /* handles small screens */
   justify-content: center;
-  opacity: 0; 
-  transition: opacity 1s ease;
-  z-index: 100;
+  gap: 10px; /* spacing between buttons */
 }
 
 .bounce {
@@ -174,7 +175,9 @@ body {
   text-shadow: 0 0 10px #fff, 0 0 20px #ff5fa2, 0 0 30px #ff5fa2;
   z-index: 100;
   text-align: center;
+  font-size: clamp(1.5rem, 5vw, 3rem);
 }
+
 
 #film-strip {
   position: absolute;
@@ -187,13 +190,15 @@ body {
 }
 
 #film-strip img {
-  width: 250px;
-  height: 180px;
+  width: 150px; /* or use clamp() */
+  height: auto;
+  max-width: 30vw; /* scales with screen */
   object-fit: cover;
-  border-radius: 10px;
+    border-radius: 10px;
   box-shadow: 0 0 20px #ff5fa2;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 #film-strip img:hover {
   transform: scale(1.1) rotateZ(-2deg);
@@ -214,3 +219,20 @@ body {
   0%, 100% { opacity: 0; transform: scale(0.5); }
   50% { opacity: 1; transform: scale(1.2); }
 }
+
+@media (max-width: 600px) {
+  #valentine-btns {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #film-strip {
+    bottom: 5%;
+    gap: 10px;
+  }
+
+  #valentine-message {
+    font-size: 2rem;
+  }
+}
+
