@@ -20,9 +20,7 @@ for (let i = 1; i <= N; i++) {
   h.appendChild(v);
   love.appendChild(h);
   ui.appendChild(love);
-}
-
-// Typewriter effect for Valentine text
+}// Typewriter effect for Valentine text
 setTimeout(() => {
   const text = document.createElement("div");
   text.id = "valentine-text";
@@ -31,7 +29,7 @@ setTimeout(() => {
   const message = "Will you be my valentine?";
   let i = 0;
 
-  // Blur hearts immediately when typing starts
+  // Blur hearts when typing starts
   const ui = document.getElementById("ui");
   ui.style.filter = "blur(3px) brightness(0.6)";
 
@@ -39,9 +37,49 @@ setTimeout(() => {
     if (i < message.length) {
       text.textContent += message[i];
       i++;
-      setTimeout(typeWriter, 120); // typing speed
+      setTimeout(typeWriter, 120);
+    } else {
+      // Create Yes/No buttons
+      const btnContainer = document.createElement("div");
+      btnContainer.id = "valentine-btns";
+
+      const yesBtn = document.createElement("button");
+      yesBtn.className = "valentine-btn";
+      yesBtn.textContent = "Yes!";
+
+      const noBtn = document.createElement("button");
+      noBtn.className = "valentine-btn";
+      noBtn.textContent = "no";
+
+      btnContainer.appendChild(yesBtn);
+      btnContainer.appendChild(noBtn);
+      document.body.appendChild(btnContainer);
+
+      // Fade in buttons
+      requestAnimationFrame(() => {
+        btnContainer.style.opacity = 1;
+      });
+
+      // Yes button click
+      let yesSize = 3; // starting font size in rem
+      yesBtn.addEventListener("click", () => alert("hehehehhee i love you baby"));
+
+      // No button swaps places with Yes on hover
+      noBtn.addEventListener("mouseenter", () => {
+        // Swap text content (optional) or just positions
+        const yesPos = yesBtn.style.order || "0";
+        const noPos = noBtn.style.order || "1";
+
+        // Swap their order in flexbox container
+        yesBtn.style.order = noPos;
+        noBtn.style.order = yesPos;
+
+        // Grow Yes a little
+        yesSize += 0.3;
+        yesBtn.style.fontSize = yesSize + "rem";
+      });
     }
   }
 
   typeWriter();
-}, 2100); // after hearts fade-in
+}, 2100);
