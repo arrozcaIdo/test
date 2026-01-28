@@ -86,3 +86,18 @@ body {
   79%  { transform: translateY(428.6px); }
   100% { transform: translateY(180px); }
 }
+
+/* Fade-in wrapper for the whole animation without moving it */
+#ui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
